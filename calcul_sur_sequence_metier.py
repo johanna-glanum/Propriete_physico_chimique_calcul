@@ -180,7 +180,7 @@ def compute_charge_and_pH(seq, df_visu, dico_final, d_ioni, d_charge, taille, pH
         borne_inf_soluble_pH, borne_sup_soluble_pH))
     # print("Indices des seuils : bas {}, haut {}".format(indice_bas_soluble, indice_haut_soluble))
 
-    return pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH
+    return pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH
 
 
 def verifier_seq_2(seq):
