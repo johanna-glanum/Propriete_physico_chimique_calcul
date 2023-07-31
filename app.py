@@ -60,7 +60,7 @@ if st.button("Calculer les propriétées de la séquence"):
     plt.grid(False)
     plt.show()
 
-    st.plotly_chart(fig)
+    st.pyplot(fig)
 
 else:
     st.text('En attente d\'un pH')
