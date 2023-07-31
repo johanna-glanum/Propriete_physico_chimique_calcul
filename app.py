@@ -23,7 +23,7 @@ if st.button('Calculer la proportion des AA'):
     st.text(proportions)
 
     fig, ax = plt.subplots()
-    ax.plt.bar(amino_acids, proportions)
+    ax.bar(amino_acids, proportions)
     plt.xlabel('Acides aminés')
     plt.ylabel('Pourcentage')
     plt.title('Proportion des acides aminés dans la séquence peptidique')
