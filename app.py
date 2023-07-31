@@ -1,7 +1,7 @@
 
 import streamlit as st
-import streamlit_echarts
-from streamlit_echarts import st_echarts
+import matplotlib
+import matplotlib.pyplot as plt
 from collections import Counter
 
 def plot_amino_acid_proportions(sequence):
@@ -22,18 +22,11 @@ if st.button('Calculer la proportion des AA'):
 else:
     st.text('En attente d\'une séquence')
 
-
 proportions = plot_amino_acid_proportions(sequence)
 
-options = {
-    "xAxis": {
-        "type": "category",
-        "data": amino_acids,
-    },
-    "yAxis": {"type": "value"},
-    "series": [
-        {"data": proportions}
-    ],
-}
-
-st_echarts(options=options, height="500px")
+plt.bar(amino_acids, proportions)
+plt.xlabel('Acides aminés')
+plt.ylabel('Pourcentage')
+plt.title('Proportion des acides aminés dans la séquence peptidique')
+plt.grid(False)
+plt.show()
