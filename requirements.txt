@@ -1,3 +1,6 @@
 streamlit
 matplotlib
 streamlit-echarts
+pandas
+numpy
+scikit-learn

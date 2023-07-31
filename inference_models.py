@@ -1,7 +1,8 @@
 from joblib import load
 import pandas as pd
 import numpy as np
-
+import pickle
+import sklearn
 
 MODELS = ["Dummy","KNN" ,"SVM" , "Tree", "Random Forest", "MLP" ]
 dico_AA = pd.read_csv('./data/pka_AA.csv',sep=';', encoding='latin-1', decimal = ",")
@@ -27,8 +28,10 @@ def preprocess_sequence(sequence):
 solubity_models = {}
 pI_models = {}
 for model_name in MODELS:
-    solubity_models[model_name] = load("./models/solubility/{}_solubility.joblib".format(model_name))
-    pI_models[model_name] = load("./models/pI/{}_pI.joblib".format(model_name))
+    with open("./models/solubility/{}_solubility.pkl".format(model_name), "rb") as f:
+        solubity_models[model_name] = pickle.load(f)
+    with open("./models/pI/{}_pI.pkl".format(model_name), "rb") as f:
+        pI_models[model_name] = pickle.load(f)
 
 
 
