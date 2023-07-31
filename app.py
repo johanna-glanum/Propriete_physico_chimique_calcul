@@ -21,12 +21,14 @@ proportions, amino_acids = plot_amino_acid_proportions(sequence)
 if st.button('Calculer la proportion des AA'):
     st.text(amino_acids)
     st.text(proportions)
-    
-    chart_data = pd.DataFrame(
-    proportions,
-    columns=amino_acids)
 
-    st.bar_chart(chart_data)
+    df = pd.DataFrame([amino_acids, proportions])
+    new_header = df.iloc[0] 
+    df = df[1:]
+    df.columns = new_header
+    
+
+    st.bar_chart(df)
 else:
     st.text('En attente d\'une séquence')
 
