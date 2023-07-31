@@ -1,6 +1,8 @@
 
 import streamlit as st
 import matplotlib
+import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 from collections import Counter
 
@@ -31,8 +33,7 @@ else:
 proportions = plot_amino_acid_proportions(sequence)
 
 
-import pandas as pd
-import numpy as np
+
 
 
 
