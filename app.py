@@ -1,5 +1,6 @@
 
 import streamlit as st
+import streamlit_echarts
 from streamlit_echarts import st_echarts
 from collections import Counter
 
