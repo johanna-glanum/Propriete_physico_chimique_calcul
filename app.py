@@ -9,8 +9,10 @@ def plot_amino_acid_proportions(sequence):
     total_amino_acids = len(sequence)
     amino_acids = list(amino_acid_counts.keys())
     proportions = [count / total_amino_acids * 100 for count in amino_acid_counts.values()]
+    return proportions
 
 
 sequence = st.text_input('Write a sequence')
-st.text(plot_amino_acid_proportions(sequence))
+if st.button('Calculer la proportion des AA'):
+    st.text(plot_amino_acid_proportions(sequence))
 
