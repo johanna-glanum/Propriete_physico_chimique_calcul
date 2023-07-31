@@ -18,7 +18,7 @@ def preprocess_sequence(sequence):
     features = np.zeros(N_AA)
     for i in range(N_AA):
         features[i] = sequence.count(all_AA[i])
-    return features
+    return features.reshape(1,-1)
 
 
 
