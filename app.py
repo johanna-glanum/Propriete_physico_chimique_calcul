@@ -22,7 +22,7 @@ pH = st.text_input("Donner un pH")
 
 if st.button("Calculer les propriétées de la séquence"):
 
-    pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH, pM = calcul_all(seq = sequence, pH=pH)
+    pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH, pM = calcul_all(seq = sequence, pH=float(pH))
 
 
     st.text("A pH = {}, la charge global est {}".format(pH, charge_pH))
