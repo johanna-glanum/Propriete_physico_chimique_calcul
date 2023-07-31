@@ -24,9 +24,13 @@ else:
 
 proportions = plot_amino_acid_proportions(sequence)
 
-plt.bar(['A', 'R'], [20, 10])
-plt.xlabel('Acides aminés')
-plt.ylabel('Pourcentage')
-plt.title('Proportion des acides aminés dans la séquence peptidique')
-plt.grid(False)
-plt.show()
+
+import pandas as pd
+import numpy as np
+
+
+chart_data = pd.DataFrame(
+    np.random.randn(20, 3),
+    columns=["a", "b", "c"])
+
+st.bar_chart(chart_data)
