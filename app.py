@@ -24,7 +24,7 @@ else:
 
 proportions = plot_amino_acid_proportions(sequence)
 
-plt.bar(amino_acids, proportions)
+plt.bar(['A', 'R'], [20, 10])
 plt.xlabel('Acides aminés')
 plt.ylabel('Pourcentage')
 plt.title('Proportion des acides aminés dans la séquence peptidique')
