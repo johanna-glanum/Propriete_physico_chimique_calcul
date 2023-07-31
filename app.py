@@ -22,13 +22,15 @@ if st.button('Calculer la proportion des AA'):
     st.text(amino_acids)
     st.text(proportions)
 
-    df = pd.DataFrame([amino_acids, proportions])
-    new_header = df.iloc[0] 
-    df = df[1:]
-    df.columns = new_header
-    
+    fig, ax = plt.subplots()
+    ax.plt.bar(amino_acids, proportions)
+    plt.xlabel('Acides aminés')
+    plt.ylabel('Pourcentage')
+    plt.title('Proportion des acides aminés dans la séquence peptidique')
+    plt.grid(False)
+    plt.show()
 
-    st.bar_chart(df)
+    st.pyplot(fig)
 else:
     st.text('En attente d\'une séquence')
 
