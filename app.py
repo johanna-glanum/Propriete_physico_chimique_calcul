@@ -71,7 +71,7 @@ if st.button("Prédire par machine learning la solubilité à pH 7 et son pI"):
     st.text("Prediction de la solubilité : ")
     st.dataframe(prediction_solub)
     st.text("Prédiction du pI : ")
-    st.datadrame(prediction_pI)
+    st.dataframe(prediction_pI)
 
 
 
