@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 import sklearn
 
-MODELS = ["Dummy","KNN" ,"SVM" , "Tree", "Random Forest", "MLP" ]
+MODELS = ["KNN" ,"SVM" , "Tree", "Random Forest", "MLP" ]
 dico_AA = pd.read_csv('./data/pka_AA.csv',sep=';', encoding='latin-1', decimal = ",")
 dico_AA = dico_AA.copy()
 dico_AA.index = dico_AA["Sym"]
@@ -41,7 +41,7 @@ def predict_solubility(sequence):
     features = preprocess_sequence(sequence)
     for model in solubity_models.keys():
         prediction = solubity_models[model].predict(features)
-        if prediction == 0:
+        if prediction[0] == 0:
             result[model] = "Non soluble"
         else:
             result[model] = "Soluble"
@@ -54,7 +54,7 @@ def predict_pI(sequence):
     features = preprocess_sequence(sequence)
     for model in solubity_models.keys():
         prediction = pI_models[model].predict(features)
-        result[model] = prediction
+        result[model] = prediction[0]
     
     return pd.DataFrame(result)
 
