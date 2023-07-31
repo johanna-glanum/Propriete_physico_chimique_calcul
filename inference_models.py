@@ -46,7 +46,7 @@ def predict_solubility(sequence):
         else:
             result[model] = "Soluble"
     
-    return pd.DataFrame(result)
+    return pd.DataFrame(result, index=[0])
 
 
 def predict_pI(sequence):
@@ -56,7 +56,7 @@ def predict_pI(sequence):
         prediction = pI_models[model].predict(features)
         result[model] = prediction[0]
     
-    return pd.DataFrame(result)
+    return pd.DataFrame(result, index=[0])
 
 
 
