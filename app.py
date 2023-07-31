@@ -19,6 +19,12 @@ proportions, amino_acids = plot_amino_acid_proportions(sequence)
 if st.button('Calculer la proportion des AA'):
     st.text(amino_acids)
     st.text(proportions)
+    
+    chart_data = pd.DataFrame(
+    proportions,
+    columns=amino_acids)
+
+    st.bar_chart(chart_data)
 else:
     st.text('En attente d\'une séquence')
 
@@ -29,8 +35,4 @@ import pandas as pd
 import numpy as np
 
 
-chart_data = pd.DataFrame(
-    np.random.randn(20, 3),
-    columns=["a", "b", "c"])
 
-st.bar_chart(chart_data)
