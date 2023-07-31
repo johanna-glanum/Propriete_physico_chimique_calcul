@@ -15,10 +15,9 @@ import matplotlib.pyplot as plt
 import csv
 import re
 
-import streamlit as st
 
-
-dico_AA = pd.read_csv('./data/pka_AA.csv', sep=';', encoding='latin-1', decimal=",")
+dico_AA = pd.read_csv('./data/pka_AA.csv', sep=';',
+                      encoding='latin-1', decimal=",")
 dico_IONI = pd.read_csv('./data/IONISABLE.csv', sep=';',
                         encoding='latin-1', decimal=",")
 
@@ -50,9 +49,9 @@ def calculer_phi_AA(dico_AA, seq):
     phi = (pka_n + pka_c) / 2
 
     if phi == dico_AA.get("pHi")[seq]:
-        st.text("le calcul de phi est correct, il vaut : " + str(phi))
+        print("le calcul de phi est correct, il vaut : " + str(phi))
     else:
-        st.text("Erreur de calcul pour l'acide aminé " + seq)
+        print("Erreur de calcul pour l'acide aminé " + seq)
 
 
 def calcul_pKa(seq, dico_AA, dico_IONI):
@@ -62,7 +61,7 @@ def calcul_pKa(seq, dico_AA, dico_IONI):
     for aa in seq:
         if aa in ['R', 'D', 'C', 'E', 'H', 'K', 'Y']:
             tmp = dico_IONI['protonnee'][aa]
-            # st.text(tmp)
+            # print(tmp)
 
             if tmp not in dico_temp.keys():
                 i = 1
@@ -84,101 +83,113 @@ def calcul_pKa(seq, dico_AA, dico_IONI):
 def create_dataframe(dico_final, d_ioni, d_charge):
     taille = len(dico_final) + 1
     protonée = np.array([[key]*taille for key in dico_final.keys()])
-    
-    déproto = np.array([[d_ioni[re.sub(r"m\d+\Z", "", key)]]*taille for key in dico_final.keys()])
-    
-    proto_charge = np.array([[d_charge[re.sub(r"m\d+\Z", "", key)]]*taille for key in dico_final.keys()])
-    deproto_charge = np.array([[d_charge[d_ioni[re.sub(r"m\d+\Z", "", key)]]]*taille for key in dico_final.keys()])                             
-    
+
+    déproto = np.array([[d_ioni[re.sub(r"m\d+\Z", "", key)]]
+                       * taille for key in dico_final.keys()])
+
+    proto_charge = np.array(
+        [[d_charge[re.sub(r"m\d+\Z", "", key)]]*taille for key in dico_final.keys()])
+    deproto_charge = np.array(
+        [[d_charge[d_ioni[re.sub(r"m\d+\Z", "", key)]]]*taille for key in dico_final.keys()])
+
     arr = np.char.add(np.tril(protonée), np.triu(déproto, k=1))
     df_visu = pd.DataFrame(arr)
-    #st.text(protonée)
-    st.text(" ")
-    # st.text(déproto)
-    st.text(" ")
-    #st.text(df_visu)
+    # print(protonée)
+    print(" ")
+    # print(déproto)
+    print(" ")
+    # print(df_visu)
     return df_visu
 
 
+def compute_charge_and_pH(seq, df_visu, dico_final, d_ioni, d_charge, taille, pH=7, seuil_bas=-1, seuil_haut=1):
 
-
-def compute_charge_and_pH(seq, df_visu, dico_final, d_ioni, d_charge,taille, pH = 7, seuil_bas = -1, seuil_haut = 1):
-    
-    proto_charge = np.array([[d_charge[re.sub(r"m\d+\Z", "", key)]]*taille for key in dico_final.keys()])
-    #st.text(proto_charge)
-    deproto_charge = np.array([[d_charge[d_ioni[re.sub(r"m\d+\Z", "", key)]]]*taille for key in dico_final.keys()]) 
-    #st.text(deproto_charge)
+    proto_charge = np.array(
+        [[d_charge[re.sub(r"m\d+\Z", "", key)]]*taille for key in dico_final.keys()])
+    # print(proto_charge)
+    deproto_charge = np.array(
+        [[d_charge[d_ioni[re.sub(r"m\d+\Z", "", key)]]]*taille for key in dico_final.keys()])
+    # print(deproto_charge)
     charge_table = np.tril(proto_charge) + np.triu(deproto_charge, k=1)
-    #st.text(deproto_charge)
+    # print(deproto_charge)
     charge_global = charge_table.sum(axis=0)
-    #st.text(deproto_charge)
+    # print(deproto_charge)
     indice_zero = np.where(charge_global == 0)[0][0]
-    #st.text(deproto_charge)
-    indice_avant = indice_zero - 1 
-    #st.text(deproto_charge)
+    # print(deproto_charge)
+    indice_avant = indice_zero - 1
+    # print(deproto_charge)
 
-    st.text(type(df_visu))
-    
-    
+    print(type(df_visu))
+
     valeur_pka = list(dico_final.values())[indice_avant]
-    #st.text(deproto_charge)
+    # print(deproto_charge)
     valeur_pkb = list(dico_final.values())[indice_zero]
-    #st.text(deproto_charge)
-    
+    # print(deproto_charge)
+
     pHi_seq = ((valeur_pka + valeur_pkb)/2)
-    #st.text(deproto_charge)
-    
+    # print(deproto_charge)
+
     zwiterion_0 = df_visu.iloc[:, indice_zero]
-    #st.text(deproto_charge)
+    # print(deproto_charge)
     zwiterion = zwiterion_0.values
-    #st.text(deproto_charge)
+    # print(deproto_charge)
 
     indice_bas_soluble = np.where(charge_global <= seuil_bas)[0][0]
     """
-    st.text(charge_global)
-    st.text(np.where(charge_global <= seuil_bas))
-    st.text(np.where(charge_global >= seuil_haut))
-    st.text(list(dico_final.values()))
+    print(charge_global)
+    print(np.where(charge_global <= seuil_bas))
+    print(np.where(charge_global >= seuil_haut))
+    print(list(dico_final.values()))
     """
     indice_haut_soluble = np.where(charge_global >= seuil_haut)[0][-1]
 
-
     indice_pH = (np.abs(np.array(list(dico_final.values())) - pH)).argmin()
 
+    charge_pH = charge_global[indice_pH]
 
-    st.text("A pH = {}, la charge global est {}".format(pH, charge_global[indice_pH]))
+    forme_sequence = " ".join(df_visu[indice_pH].to_numpy())
 
-    st.text("La forme de la séquence est {}".format(" ".join(df_visu[indice_pH].to_numpy())))
-    
-    
-    st.text(f"Le phi de la sequence {seq} est de :{pHi_seq}")
-    st.text(" ")
-    st.text(f"La forme des groupe ionisé du zwiterion de la séquence {seq} est :\n{zwiterion}")
-    st.text(" ")
-    st.text(f"Les deux pka qui encadre la forme neutre de la sequence {seq} est : {valeur_pka} et {valeur_pkb}")
-    #st.text(charge_global)
-    #st.text(indice_bas_soluble, indice_haut_soluble)
+    soluble = True
+    borne_inf_pH = list(dico_final.values())[0]
+    borne_inf_soluble_pH = list(dico_final.values())[indice_haut_soluble]
+    borne_sup_soluble_pH = list(dico_final.values())[indice_bas_soluble]
+    borne_sup_pH = list(dico_final.values())[-1]
 
-    if pH in [list(dico_final.values())[indice_haut_soluble], list(dico_final.values())[indice_bas_soluble]]:
-        st.text("la mollécule n'est pas soluble à pH = {}".format(pH))
-    st.text("la mollécule est soluble à pH = {}".format(pH))
+    print("A pH = {}, la charge global est {}".format(pH, charge_pH))
 
-    st.text("La sequence est soluble pour un pH dans l'intervalle [{}, {}] et [{}, {}]".format(list(dico_final.values())[0], list(dico_final.values())[indice_haut_soluble], list(dico_final.values())[indice_bas_soluble], list(dico_final.values())[-1]))
-    st.text("Pas soluble dans l'intervalle [{}, {}]".format(list(dico_final.values())[indice_haut_soluble], list(dico_final.values())[indice_bas_soluble]))
-    #st.text("Indices des seuils : bas {}, haut {}".format(indice_bas_soluble, indice_haut_soluble))
+    print("La forme de la séquence est {}".format(forme_sequence))
 
-    
-    return pHi_seq, zwiterion, valeur_pka, valeur_pkb
+    print(f"Le phi de la sequence {seq} est de :{pHi_seq}")
+    print(" ")
+    print(
+        f"La forme des groupe ionisé du zwiterion de la séquence {seq} est :\n{zwiterion}")
+    print(" ")
+    print(
+        f"Les deux pka qui encadre la forme neutre de la sequence {seq} est : {valeur_pka} et {valeur_pkb}")
+    # print(charge_global)
+    # print(indice_bas_soluble, indice_haut_soluble)
 
+    if pH in [borne_inf_soluble_pH, borne_sup_soluble_pH]:
+        print("la mollécule n'est pas soluble à pH = {}".format(pH))
+        soluble = False
+    print("la mollécule est soluble à pH = {}".format(pH))
+
+    print("La sequence est soluble pour un pH dans l'intervalle [{}, {}] et [{}, {}]".format(
+        borne_inf_pH, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_sup_pH))
+    print("Pas soluble dans l'intervalle [{}, {}]".format(
+        borne_inf_soluble_pH, borne_sup_soluble_pH))
+    # print("Indices des seuils : bas {}, haut {}".format(indice_bas_soluble, indice_haut_soluble))
+
+    return pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH
 
 
 def verifier_seq_2(seq):
     for caractere in seq:
-        if caractere not in ["A","R","N","D","C","Q","E","G","H","I","L","K","M","F","P","S","T","W","Y","V"]:
-            st.text("False : ", caractere)
-            #st.text("erreur, la séquence ne contient pas uniquement des acides aminés protéinogènes")
+        if caractere not in ["A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V"]:
+            print("False : ", caractere)
+            # print("erreur, la séquence ne contient pas uniquement des acides aminés protéinogènes")
             return False
-    #st.text("La séquence contient uniquement des acides aminés protéinogènes")
+    # print("La séquence contient uniquement des acides aminés protéinogènes")
     return True
 
 
@@ -187,22 +198,22 @@ def get_PM(chain):
     return sum([data_AA[data_AA["Abr_L"] == x]["PM"].values[0] for x in chain]) - (n-1)*18.01528
 
 
-
-def calcul_all(seq, pH = 7):
+def calcul_all(seq, pH=7):
     if verifier_seq_2(seq):
-        st.text(seq)
+        print(seq)
         dico_final = calcul_pKa(seq, dico_AA, dico_IONI)
         taille = len(dico_final) + 1
         try:
             df_visu = create_dataframe(dico_final, d_ioni, d_charge)
-        except TypeError :
-            st.text(seq)
+        except TypeError:
+            print(seq)
             return np.nan
-        pHi_seq, zwiterion, valeur_pka, valeur_pkb = compute_charge_and_pH(df_visu, dico_final, d_ioni, d_charge, taille, pH)
-        
-        st.text("Le poids moléculaire est {}".format(get_PM(seq))) 
+        pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH, = compute_charge_and_pH(
+            seq, df_visu, dico_final, d_ioni, d_charge, taille, pH)
 
+        pM = get_PM(seq)
+        print("Le poids moléculaire est {}".format())
 
-        return pHi_seq
+        return pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH, pM
     else:
-        return np.nan
+        return False
