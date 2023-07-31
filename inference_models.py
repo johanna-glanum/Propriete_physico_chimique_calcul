@@ -2,7 +2,7 @@ from joblib import load
 import pandas as pd
 import numpy as np
 import pickle
-
+import sklearn
 
 MODELS = ["Dummy","KNN" ,"SVM" , "Tree", "Random Forest", "MLP" ]
 dico_AA = pd.read_csv('./data/pka_AA.csv',sep=';', encoding='latin-1', decimal = ",")
