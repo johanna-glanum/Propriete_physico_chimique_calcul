@@ -15,4 +15,5 @@ def plot_amino_acid_proportions(sequence):
 sequence = st.text_input('Write a sequence')
 if st.button('Calculer la proportion des AA'):
     st.text(plot_amino_acid_proportions(sequence))
-
+else:
+    st.text('En attente d\'une séquence')
