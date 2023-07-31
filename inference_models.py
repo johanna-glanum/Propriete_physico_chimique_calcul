@@ -28,9 +28,9 @@ def preprocess_sequence(sequence):
 solubity_models = {}
 pI_models = {}
 for model_name in MODELS:
-    with open("./models/solubility/{}_solubility.joblib".format(model_name), "rb") as f:
+    with open("./models/solubility/{}_solubility.pkl".format(model_name), "rb") as f:
         solubity_models[model_name] = pickle.load(f)
-    with open("./models/pI/{}_pI.joblib".format(model_name), "rb") as f:
+    with open("./models/pI/{}_pI.pkl".format(model_name), "rb") as f:
         pI_models[model_name] = pickle.load(f)
 
 
