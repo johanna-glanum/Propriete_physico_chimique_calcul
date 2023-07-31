@@ -1,0 +1,21 @@
+Nom;Symbole;Sym;pKa1_c;pKa2_n;pKr;pHi
+Alanine;ALA;A;2,35;9,69;NA;6,02
+Arginine ;ARG;R;2,17;9,04;12,48;10,76
+Asparagine;ASN;N;2,02;8,8;NA;5,41
+Acide Aspartique;ASP;D;2,09;9,82;3,86;2,97
+Cystéine;CYS;C;1,96;10,28;8,18;5,07
+Glutamine;GLN;Q;2,17;9,13;NA;2,97
+Acide Glutamique ;GLU;E;2,19;9,67;4,25;3,22
+Glycine;GLY;G;2,34;9,78;NA;6,06
+Histidine;HIS;H;1,82;9,17;6;7,58
+Isoleucine;ILE;I;2,36;9,68;NA;6,02
+Leucine;LEU;L;2,36;9,64;NA;6
+Lysine;LYS;K;2,18;8,95;10,53;9,74
+Methionine;MET;M;2,28;9,21;NA;5,75
+Phenilalanine;PHE;F;1,83;9,24;NA;5,53
+Proline;PRO;P;1,99;10,6;NA;6,3
+Serine;SER;S;2,21;9,15;NA;5,68
+Threonine;THR;T;2,71;9,62;NA;6,19
+Tryptophane;TRP;W;2,38;9,39;NA;5,89
+Tyrosine;TYR;Y;2,3;9,11;10,07;5,65
+Valine;VAL;V;2,32;9,62;NA;5,97
