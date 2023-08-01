@@ -12,7 +12,7 @@ dico_AA = dico_AA[["pKa1_c","pKa2_n","pKr","pHi"]]
 all_AA = dico_AA.index.to_numpy()
 N_AA = len(all_AA)
 
-pI_ref = pd.read_csv("./data/data_test_compa_10kda.csv")
+pI_ref = pd.read_csv("./data/data_test_compa_10kda.csv"^, sep=";")
 pI_ref.columns = list(pI_ref.iloc[0])
 pI_ref = pI_ref.drop(0, axis=0)
 pI_ref = pI_ref[[" sequence", " Avg_pI"]]
