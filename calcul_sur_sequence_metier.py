@@ -181,7 +181,7 @@ def compute_charge_and_pH(seq, df_visu, dico_final, d_ioni, d_charge, taille, pH
 
 def verifier_seq_2(seq):
     for caractere in seq:  
-        if caractere not in ["A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V"]:
+        if caractere.upper() not in ["A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V"]:
             print("False : ", caractere)
             # print("erreur, la séquence ne contient pas uniquement des acides aminés protéinogènes")
             return False
