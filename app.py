@@ -20,8 +20,10 @@ def plot_amino_acid_proportions(sequence):
 sequence = str(st.text_input('Write a sequence'))
 pH = st.text_input("Donner un pH")
 
-if st.button("Calculer les propriétées de la séquence"):
 
+pHi_seq = None
+if st.button("Calculer les propriétées de la séquence"):
+    state_calc = True
     pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, valeur_pkc,valeur_pkb, pM = calcul_all(seq = sequence, pH=float(pH))
 
     st.text("Le poids moléculaire est {}".format(pM))
@@ -74,6 +76,9 @@ if st.button("Prédire par machine learning la solubilité à pH 7 et son pI"):
 
     prediction_solub = predict_solubility(sequence)
     prediction_pI = predict_pI(sequence)
+
+    if pHi_seq != None:
+        prediction_pI["val_calc"] = pHi_seq
 
     st.text("Prediction de la solubilité : ")
     st.dataframe(prediction_solub)
