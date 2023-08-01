@@ -151,9 +151,9 @@ def compute_charge_and_pH(seq, df_visu, dico_final, d_ioni, d_charge, taille, pH
 
     soluble = True
     borne_inf_pH = list(dico_final.values())[0]
-    borne_inf_soluble_pH = list(dico_final.values())[indice_haut_soluble]
-    borne_sup_soluble_pH = list(dico_final.values())[indice_bas_soluble-1]
-    borne_sup_pH = list(dico_final.values())[-1]
+    #borne_inf_soluble_pH = list(dico_final.values())[indice_haut_soluble]
+    #borne_sup_soluble_pH = list(dico_final.values())[indice_bas_soluble-1]
+    #borne_sup_pH = list(dico_final.values())[-1]
 
     print("A pH = {}, la charge global est {}".format(pH, charge_pH))
 
@@ -167,8 +167,9 @@ def compute_charge_and_pH(seq, df_visu, dico_final, d_ioni, d_charge, taille, pH
     print(
         f"Les deux pka qui encadre la forme neutre de la sequence {seq} est : {valeur_pka} et {valeur_pkb}")
 
+    print("làlàlà")
 
-    if pH in [borne_inf_soluble_pH, borne_sup_soluble_pH]:
+    if pH in [valeur_pkc, valeur_pkb]:
         print("la mollécule n'est pas soluble à pH = {}".format(pH))
         soluble = False
     print("la mollécule est soluble à pH = {}".format(pH))
