@@ -22,7 +22,7 @@ pH = st.text_input("Donner un pH")
 
 if st.button("Calculer les propriétées de la séquence"):
 
-    pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH, pM = calcul_all(seq = sequence, pH=float(pH))
+    pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, valeur_pkc,valeur_pkb, pM = calcul_all(seq = sequence, pH=float(pH))
 
     st.text("Le poids moléculaire est {}".format(pM))
 
@@ -42,10 +42,14 @@ if st.button("Calculer les propriétées de la séquence"):
     else:
         st.text("la mollécule est soluble à pH = {}".format(pH))
 
-    st.text("La sequence est soluble pour un pH dans l'intervalle [{}, {}] et [{}, {}]".format(
-        borne_inf_pH, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_sup_pH))
-    st.text("Pas soluble dans l'intervalle [{}, {}]".format(
-        borne_inf_soluble_pH, borne_sup_soluble_pH))
+    #st.text("La sequence est soluble pour un pH dans l'intervalle [{}, {}] et [{}, {}]".format(
+        #valeur_pkc,valeur_pkb))
+    
+    #st.text("Pas soluble dans l'intervalle [{}, {}]".format(
+        #valeur_pkc,valeur_pkb))
+    st.text("Soluble si c'est inferieur à {} et superieur à {}".format(valeur_pkc, valeur_pkb))
+    st.text("Peu Soluble si pH compris entre [{}, {}]".format(valeur_pka, valeur_pkb))
+    
 
     proportions, amino_acids = plot_amino_acid_proportions(sequence)
 
