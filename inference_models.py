@@ -12,6 +12,11 @@ dico_AA = dico_AA[["pKa1_c","pKa2_n","pKr","pHi"]]
 all_AA = dico_AA.index.to_numpy()
 N_AA = len(all_AA)
 
+pI_ref = pd.read_csv("./data/pI_ref_compa_10kda.csv")
+pI_ref.columns = list(pI_ref.iloc[0])
+pI_ref = pI_ref.drop(0, axis=0)
+pI_ref = pI_ref[["sequence", "Avg_pI"]]
+
 
 def preprocess_sequence(sequence):
     
@@ -55,6 +60,10 @@ def predict_pI(sequence):
     for model in solubity_models.keys():
         prediction = pI_models[model].predict(features)
         result[model] = prediction[0]
+    
+    ref = pI_ref[pI_ref[" sequence"] == " "+sequence][" Avg_pI"]
+    if len(ref) > 0:
+        result["reférence"] = ref.values[0]
     
     return pd.DataFrame(result, index=[0])
 
