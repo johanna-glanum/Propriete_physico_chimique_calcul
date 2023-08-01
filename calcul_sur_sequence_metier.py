@@ -215,4 +215,5 @@ def calcul_all(seq, pH=7):
             return np.nan
 
     else:
-        return 0,0,0,0,0,0,0,0,0,0
+        return 1,1,1,1,1,1,1,1,1,1
+    
