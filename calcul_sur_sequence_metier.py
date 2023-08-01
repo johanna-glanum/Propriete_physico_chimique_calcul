@@ -176,7 +176,7 @@ def compute_charge_and_pH(seq, df_visu, dico_final, d_ioni, d_charge, taille, pH
 
     print("Soluble si c'est inferieur à {} et superieur à {}".format(valeur_pkc, valeur_pkb))
     print("Peu Soluble si pH compris entre [{}, {}]".format(valeur_pka, valeur_pkb))
-    return pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH
+    return pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, valeur_pkc,valeur_pkb
 
 
 def verifier_seq_2(seq):
@@ -202,13 +202,13 @@ def calcul_all(seq, pH=7):
         taille = len(dico_final) + 1
         try:
             df_visu = create_dataframe(dico_final, d_ioni, d_charge)
-            pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH = compute_charge_and_pH(
+            pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, valeur_pkc,valeur_pkb = compute_charge_and_pH(
             seq, df_visu, dico_final, d_ioni, d_charge, taille, pH)
 
             pM = get_PM(seq)
         
 
-            return pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH, pM
+            return pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble,valeur_pkc,valeur_pkb, pM
       
         except TypeError:
             print(seq)
