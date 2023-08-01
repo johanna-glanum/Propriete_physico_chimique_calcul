@@ -206,7 +206,7 @@ def calcul_all(seq, pH=7):
         taille = len(dico_final) + 1
         try:
             df_visu = create_dataframe(dico_final, d_ioni, d_charge)
-            pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH, = compute_charge_and_pH(
+            pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH = compute_charge_and_pH(
             seq, df_visu, dico_final, d_ioni, d_charge, taille, pH)
 
             pM = get_PM(seq)
