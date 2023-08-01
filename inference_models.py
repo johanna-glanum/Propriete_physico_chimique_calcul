@@ -15,7 +15,7 @@ N_AA = len(all_AA)
 pI_ref = pd.read_csv("./data/data_test_compa_10kda.csv")
 pI_ref.columns = list(pI_ref.iloc[0])
 pI_ref = pI_ref.drop(0, axis=0)
-pI_ref = pI_ref[["sequence", "Avg_pI"]]
+pI_ref = pI_ref[[" sequence", " Avg_pI"]]
 
 
 def preprocess_sequence(sequence):
