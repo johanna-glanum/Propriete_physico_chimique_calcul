@@ -217,4 +217,4 @@ def calcul_all(seq, pH=7):
 
         return pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH, pM
     else:
-        return False
+        return np.nan
