@@ -152,7 +152,7 @@ def compute_charge_and_pH(seq, df_visu, dico_final, d_ioni, d_charge, taille, pH
     soluble = True
     borne_inf_pH = list(dico_final.values())[0]
     borne_inf_soluble_pH = list(dico_final.values())[indice_haut_soluble]
-    borne_sup_soluble_pH = list(dico_final.values())[indice_bas_soluble]
+    borne_sup_soluble_pH = list(dico_final.values())[indice_bas_soluble-1]
     borne_sup_pH = list(dico_final.values())[-1]
 
     print("A pH = {}, la charge global est {}".format(pH, charge_pH))
