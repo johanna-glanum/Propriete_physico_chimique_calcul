@@ -53,8 +53,8 @@ if st.button("Calculer les propriétées de la séquence"):
 
     proportions, amino_acids = plot_amino_acid_proportions(sequence)
 
-    st.text(amino_acids)
-    st.text(proportions)
+    #st.text(amino_acids)
+    #st.text(proportions)
 
     fig, ax = plt.subplots()
     ax.bar(amino_acids, proportions)
