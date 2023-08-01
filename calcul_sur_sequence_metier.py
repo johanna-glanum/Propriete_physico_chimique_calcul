@@ -106,33 +106,33 @@ def compute_charge_and_pH(seq, df_visu, dico_final, d_ioni, d_charge, taille, pH
 
     proto_charge = np.array(
         [[d_charge[re.sub(r"m\d+\Z", "", key)]]*taille for key in dico_final.keys()])
-    # print(proto_charge)
+    
     deproto_charge = np.array(
         [[d_charge[d_ioni[re.sub(r"m\d+\Z", "", key)]]]*taille for key in dico_final.keys()])
-    # print(deproto_charge)
+    
     charge_table = np.tril(proto_charge) + np.triu(deproto_charge, k=1)
-    # print(deproto_charge)
+    
     charge_global = charge_table.sum(axis=0)
-    # print(deproto_charge)
+    
     indice_zero = np.where(charge_global == 0)[0][0]
-    # print(deproto_charge)
+    
     indice_avant = indice_zero - 1
-    # print(deproto_charge)
+
 
     print(type(df_visu))
 
     valeur_pka = list(dico_final.values())[indice_avant]
-    # print(deproto_charge)
     valeur_pkb = list(dico_final.values())[indice_zero]
-    # print(deproto_charge)
+    valeur_pkc = list(dico_final.values())[indice_avant-1]
+  
 
     pHi_seq = ((valeur_pka + valeur_pkb)/2)
-    # print(deproto_charge)
+  
 
     zwiterion_0 = df_visu.iloc[:, indice_zero]
-    # print(deproto_charge)
+    
     zwiterion = zwiterion_0.values
-    # print(deproto_charge)
+    
 
     indice_bas_soluble = np.where(charge_global <= seuil_bas)[0][0]
     """
@@ -166,20 +166,15 @@ def compute_charge_and_pH(seq, df_visu, dico_final, d_ioni, d_charge, taille, pH
     print(" ")
     print(
         f"Les deux pka qui encadre la forme neutre de la sequence {seq} est : {valeur_pka} et {valeur_pkb}")
-    # print(charge_global)
-    # print(indice_bas_soluble, indice_haut_soluble)
+
 
     if pH in [borne_inf_soluble_pH, borne_sup_soluble_pH]:
         print("la mollécule n'est pas soluble à pH = {}".format(pH))
         soluble = False
     print("la mollécule est soluble à pH = {}".format(pH))
 
-    print("La sequence est soluble pour un pH dans l'intervalle [{}, {}] et [{}, {}]".format(
-        borne_inf_pH, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_sup_pH))
-    print("Pas soluble dans l'intervalle [{}, {}]".format(
-        borne_inf_soluble_pH, borne_sup_soluble_pH))
-    # print("Indices des seuils : bas {}, haut {}".format(indice_bas_soluble, indice_haut_soluble))
-
+    print("Soluble si c'est inferieur à {} et superieur à {}".format(valeur_pkc, valeur_pkb))
+    print("Peu Soluble si pH compris entre [{}, {}]".format(valeur_pka, valeur_pkb))
     return pHi_seq, zwiterion, valeur_pka, valeur_pkb, forme_sequence, charge_pH, soluble, borne_inf_soluble_pH, borne_sup_soluble_pH, borne_inf_pH, borne_sup_pH
 
 
