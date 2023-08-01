@@ -199,8 +199,9 @@ def get_PM(chain):
 
 
 def calcul_all(seq, pH=7):
+    print(seq)
     if verifier_seq_2(seq):
-        print(seq)
+        
         dico_final = calcul_pKa(seq, dico_AA, dico_IONI)
         taille = len(dico_final) + 1
         try:
