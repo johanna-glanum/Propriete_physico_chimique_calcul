@@ -17,7 +17,7 @@ def plot_amino_acid_proportions(sequence):
     return proportions, amino_acids
 
 
-sequence = st.text_input('Write a sequence')
+sequence = str(st.text_input('Write a sequence'))
 pH = st.text_input("Donner un pH")
 
 if st.button("Calculer les propriétées de la séquence"):
