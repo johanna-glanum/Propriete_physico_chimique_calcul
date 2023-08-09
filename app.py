@@ -83,16 +83,16 @@ if st.button("Prédire par machine learning la solubilité à pH 7 et son pI"):
 
     st.text("Prediction de la solubilité en 2 méthodes: ")
     
-    st.text("Regression Tree {}".format(prediction_solub_regression))
+    st.text("La valeur de la solubilité calculé à l'aide du Tree (Regression) est de {}".format(prediction_solub_regression))
     st.text("Score des métriques de Regression Tree: \n Erreur absolue moyenne : 23.419 \n Erreur relative moyenne : 2.9499")
    
-    st.text("Classification SVM {}".format(prediction_solub_binaire))
+    st.text("La valeur de la solubilité calculé à l'aide du classifieur SVM est de {}".format(prediction_solub_binaire))
     st.text("Score des métriques SVM : \n recall = 0.60279 \n accuracy = 0.60245 \n f1 = 0.60243")
     
     
     st.text("Prédiction du Point Isoélétrique : ")
 
-    st.text("Regression MLP {}".format(prediction_pI))
+    st.text("La valeur du point isoelectrique calculé à l'aide du MLR (Regression)  {}".format(prediction_pI))
     st.text("Score des métriques de Regression MLP: \n Erreur absolue moyenne : 0.1072 \n Erreur relative moyenne : 0.0155")
     
     
