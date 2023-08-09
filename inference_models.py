@@ -7,7 +7,7 @@ from conjoint_triad_sequence import conjoint_triad
 
 
 AA = pd.read_csv("./data/AA.csv", sep=";", encoding="latin-1")
-all_AA = aa["Abr_L"].to_numpy()
+all_AA = AA["Abr_L"].to_numpy()
 N_AA = len(all_AA)
 
 pI_ref = pd.read_csv("./data/data_test_compa_10kda.csv", sep=";")
