@@ -29,7 +29,7 @@ def preprocess_sequence_frequence(sequence):
     return features.reshape(1,-1)
 
 def preprocess_sequence_conjoint(sequence):
-    return np.array(list(conjoint_triad(sequence=sequence).keys())).reshape(1,-1)
+    return np.array(list(conjoint_triad(sequence=sequence).values())).reshape(1,-1)
 
 
 #loads models
