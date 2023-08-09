@@ -1,6 +1,6 @@
 from decimal import *
 import csv
-from Bio import SeqIO
+
 
 
 # Generating vector space (7*7*7)
