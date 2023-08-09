@@ -6,11 +6,8 @@ import sklearn
 from conjoint_triad_sequence import conjoint_triad
 
 
-dico_AA = pd.read_csv('./data/pka_AA.csv',sep=';', encoding='latin-1', decimal = ",")
-dico_AA = dico_AA.copy()
-dico_AA.index = dico_AA["Sym"]
-dico_AA = dico_AA[["pKa1_c","pKa2_n","pKr","pHi"]]
-all_AA = dico_AA.index.to_numpy()
+AA = pd.read_csv("./data/AA.csv", sep=";", encoding="latin-1")
+all_AA = aa["Abr_L"].to_numpy()
 N_AA = len(all_AA)
 
 pI_ref = pd.read_csv("./data/data_test_compa_10kda.csv", sep=";")
