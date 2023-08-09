@@ -48,9 +48,9 @@ def predict_solubility_classification(sequence):
     features = preprocess_sequence_conjoint(sequence)
     prediction = solubility_model_classification.predict(features)
     if prediction[0] == 0:
-        return "Non soluble"
+        return "La sequence n'est pas soluble en classification"
     else:
-       return "Soluble"
+       return "La sequence est soluble en classification"
     
 
 
