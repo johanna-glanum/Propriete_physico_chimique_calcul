@@ -63,7 +63,7 @@ def predict_pI(sequence):
 
 
 def predict_solubility_regression(sequence):
-    features = preprocess_sequence_conjoint(sequence)
+    features = preprocess_sequence_frequence(sequence)
     return solubity_model_regression.predict(features)[0]
     
 
