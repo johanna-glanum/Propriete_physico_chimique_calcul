@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import Counter
 from calcul_sur_sequence_metier import calcul_all
-from inference_models import predict_pI, predict_solubility
+from inference_models import predict_pI, predict_solubility_classification, predict_solubility_regression
 
 def plot_amino_acid_proportions(sequence):
     # Calcul des fréquences des acides aminés dans la séquence
@@ -74,16 +74,18 @@ else:
 
 if st.button("Prédire par machine learning la solubilité à pH 7 et son pI"):
 
-    prediction_solub = predict_solubility(sequence)
+    prediction_solub_binaire = predict_solubility_classification(sequence)
+    prediction_solub_regression = predict_solubility_regression(sequence)
     prediction_pI = predict_pI(sequence)
 
     if pHi_seq != None:
         prediction_pI["val_calc"] = pHi_seq
 
     st.text("Prediction de la solubilité : ")
-    st.dataframe(prediction_solub)
+    st.text("D'après le modèle de classification la sequence est {} et d'après notre modèle de regression sa valeur de solubilité est {}".format(prediction_solub_binaire, prediction_solub_regression))
     st.text("Prédiction du pI : ")
-    st.dataframe(prediction_pI)
+    st.text("D'après notre modèle, la valeur du pI est {}".format(prediction_pI))
+    
     
 
 

@@ -3,8 +3,9 @@ import pandas as pd
 import numpy as np
 import pickle
 import sklearn
+from conjoint_triad_sequence import conjoint_triad
 
-MODELS = ["KNN" ,"SVM" , "Tree", "Random Forest", "MLP" ]
+
 dico_AA = pd.read_csv('./data/pka_AA.csv',sep=';', encoding='latin-1', decimal = ",")
 dico_AA = dico_AA.copy()
 dico_AA.index = dico_AA["Sym"]
@@ -18,54 +19,53 @@ pI_ref = pI_ref.drop(0, axis=0)
 pI_ref = pI_ref[[" sequence", " Avg_pI"]]
 
 
-def preprocess_sequence(sequence):
+
+
+def preprocess_sequence_frequence(sequence):
     
     features = np.zeros(N_AA)
     for i in range(N_AA):
         features[i] = sequence.count(all_AA[i])
     return features.reshape(1,-1)
 
+def preprocess_sequence_conjoint(sequence):
+    return np.array(list(conjoint_triad(sequence=sequence).keys())).reshape(1,-1)
 
 
 #loads models
     #solubility models
+with open(r".\models\solubility_reg\Random Forest_Solub_one.pkl", "rb") as model_file:
+    solubity_model_regression = pickle.load(model_file)
 
-solubity_models = {}
-pI_models = {}
-for model_name in MODELS:
-    with open("./models/solubility/{}_solubility.pkl".format(model_name), "rb") as f:
-        solubity_models[model_name] = pickle.load(f)
-    with open("./models/pI/{}_pI.pkl".format(model_name), "rb") as f:
-        pI_models[model_name] = pickle.load(f)
+with open(r".\models\solubility_classif\SVM_solubility_classif_conj.pkl", "rb") as model_file:
+    solubility_model_classification = pickle.load(model_file)
 
-
+with open(r".\models\pI\MLP_pI_fr.pkl", "rb") as model_file:
+    pI_model = pickle.load(model_file)
 
 
-def predict_solubility(sequence):
-    result = {}
-    features = preprocess_sequence(sequence)
-    for model in solubity_models.keys():
-        prediction = solubity_models[model].predict(features)
-        if prediction[0] == 0:
-            result[model] = "Non soluble"
-        else:
-            result[model] = "Soluble"
+
+
+
+def predict_solubility_classification(sequence):
+    features = preprocess_sequence_conjoint(sequence)
+    prediction = solubility_model_classification.predict(features)
+    if prediction[0] == 0:
+        return "Non soluble"
+    else:
+       return "Soluble"
     
-    return pd.DataFrame(result, index=[0])
 
 
 def predict_pI(sequence):
-    result = {}
-    features = preprocess_sequence(sequence)
-    for model in solubity_models.keys():
-        prediction = pI_models[model].predict(features)
-        result[model] = prediction[0]
+    features = preprocess_sequence_frequence(sequence)
+    return pI_model.predict(features)[0]
+
+
+def predict_solubility_regression(sequence):
+    features = preprocess_sequence_conjoint(sequence)
+    return solubity_model_regression.predict(features)[0]
     
-    ref = pI_ref[pI_ref[" sequence"] == " "+sequence][" Avg_pI"]
-    if len(ref) > 0:
-        result["reférence"] = ref.values[0]
-    
-    return pd.DataFrame(result, index=[0])
 
 
 
