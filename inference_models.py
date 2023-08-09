@@ -34,13 +34,13 @@ def preprocess_sequence_conjoint(sequence):
 
 #loads models
     #solubility models
-with open(r".\models\solubility\Tree_Solub_one.pkl", "rb") as model_file:
+with open("./models/solubility/Tree_Solub_one.pkl", "rb") as model_file:
     solubity_model_regression = pickle.load(model_file)
 
-with open(r".\models\solubility_classif\SVM_solubility_classif_conj.pkl", "rb") as model_file:
+with open("./models/solubility_classif/SVM_solubility_classif_conj.pkl", "rb") as model_file:
     solubility_model_classification = pickle.load(model_file)
 
-with open(r".\models\pI\MLP_pI_fr.pkl", "rb") as model_file:
+with open("./models/pI/MLP_pI_fr.pkl", "rb") as model_file:
     pI_model = pickle.load(model_file)
 
 
