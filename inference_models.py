@@ -34,7 +34,7 @@ def preprocess_sequence_conjoint(sequence):
 
 #loads models
     #solubility models
-with open(r".\models\solubility_reg\Random Forest_Solub_one.pkl", "rb") as model_file:
+with open(r".\models\solubility\Tree_Solub_one.pkl", "rb") as model_file:
     solubity_model_regression = pickle.load(model_file)
 
 with open(r".\models\solubility_classif\SVM_solubility_classif_conj.pkl", "rb") as model_file:
