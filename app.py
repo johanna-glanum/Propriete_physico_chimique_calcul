@@ -81,13 +81,15 @@ if st.button("Prédire par machine learning la solubilité à pH 7 et son pI"):
     if pHi_seq != None:
         prediction_pI["val_calc"] = pHi_seq
 
+
+    st.text("Regression Tree {}".format(prediction_solub_regression))
+    st.text("Score des métriques de Regression Tree: \n Erreur absolue moyenne : 23.419 \n Erreur relative moyenne : 2.9499")
+
+    
     st.text("Prediction de la solubilité : ")
     
     st.text("Classification SVM {}".format(prediction_solub_binaire))
     st.text("Score des métriques SVM : \n recall = 0.60279 \n accuracy = 0.60245 \n f1 = 0.60243")
-
-    st.text("Regression Tree {}".format(prediction_solub_regression))
-    st.text("Score des métriques de Regression Tree: \n Erreur absolue moyenne : 23.419 \n Erreur relative moyenne : 2.9499")
     
     st.text("Prédiction du Point Isoélétrique : ")
 
